@@ -9,9 +9,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout do Código
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4 # Atualizado para v4
 
-      - name: Instalar Node e Gerar Build
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4 # Força o uso do Node mais recente
+        with:
+          node-version: '24'
+
+      - name: Instalar e Build
         run: |
           npm install
           npm run build
@@ -20,9 +25,9 @@ jobs:
         uses: appleboy/scp-action@master
         with:
           host: farma-alg-ia.c3sl.ufpr.br
-          username: seu_usuario_c3sl # <--- COLOQUE SEU LOGIN DO C3SL AQUI
+          username: seu_usuario_c3sl
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           source: "build/*"
-          target: "/caminho/no/servidor/dashboard" # <--- COLOQUE O CAMINHO DA PASTA AQUI
+          target: "/caminho/no/servidor/dashboard"
           strip_components: 1
