@@ -1,0 +1,28 @@
+name: Deploy para C3SL UFPR
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do Código
+        uses: actions/checkout@v3
+
+      - name: Instalar Node e Gerar Build
+        run: |
+          npm install
+          npm run build
+
+      - name: Enviar para o Servidor via SCP
+        uses: appleboy/scp-action@master
+        with:
+          host: farma-alg-ia.c3sl.ufpr.br
+          username: seu_usuario_c3sl # <--- COLOQUE SEU LOGIN DO C3SL AQUI
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          source: "build/*"
+          target: "/caminho/no/servidor/dashboard" # <--- COLOQUE O CAMINHO DA PASTA AQUI
+          strip_components: 1
