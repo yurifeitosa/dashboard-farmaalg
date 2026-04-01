@@ -25,9 +25,9 @@ jobs:
         uses: appleboy/scp-action@master
         with:
           host: farma-alg-ia.c3sl.ufpr.br
-          username: seu_usuario_c3sl
+          username: yrgfeitosa
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           source: "build/*"
-          target: "/caminho/no/servidor/dashboard"
+          target: "/home/yrgfeitosa/public_html/dashboard"
           strip_components: 1
