@@ -1,0 +1,20 @@
+[
+  { "Métrica": "👥 Quantidade de alunos", "Perfil 01": "479", "Perfil 02": "342", "Perfil 03": "151", "Perfil 04": "28", "Perfil 05": "194" },
+  { "Métrica": "📈 % dos alunos", "Perfil 01": "~40%", "Perfil 02": "~29%", "Perfil 03": "~13%", "Perfil 04": "~2%", "Perfil 05": "~16%" },
+  { "Métrica": "🎯 Taxa de acerto", "Perfil 01": "~22%", "Perfil 02": "~44%", "Perfil 03": "~68%", "Perfil 04": "~61%", "Perfil 05": "~21%" },
+  { "Métrica": "🔁 Submissões totais", "Perfil 01": "~132.000", "Perfil 02": "~78.000", "Perfil 03": "~28.500", "Perfil 04": "~9.200", "Perfil 05": "~24.000" },
+  { "Métrica": "📊 Média de submissões/aluno", "Perfil 01": "~275", "Perfil 02": "~228", "Perfil 03": "~189", "Perfil 04": "~328", "Perfil 05": "~124" },
+  { "Métrica": "📈 Tipo de curva de aprendizagem", "Perfil 01": "Estagnada/decrescente", "Perfil 02": "Oscilatória", "Perfil 03": "Crescente estável", "Perfil 04": "Crescente lenta", "Perfil 05": "Interrompida" },
+  { "Métrica": "🧠 Tipo de aprendizagem", "Perfil 01": "Não consolida", "Perfil 02": "Parcial", "Perfil 03": "Consolidada", "Perfil 04": "Por esforço", "Perfil 05": "Incompleta" },
+  { "Métrica": "📊 Evolução (probabilidade)", "Perfil 01": "🔻 Baixa", "Perfil 02": "⚖️ Média", "Perfil 03": "🔼 Alta", "Perfil 04": "🔼 Média/Alta", "Perfil 05": "❌ Nula" },
+  { "Métrica": "🔁 Oscilação", "Perfil 01": "🔼 Alta", "Perfil 02": "🔼 Muito alta", "Perfil 03": "🔽 Baixa", "Perfil 04": "🔼 Média", "Perfil 05": "❌" },
+  { "Métrica": "📉 Regressão", "Perfil 01": "🔼 Média", "Perfil 02": "🔼 Média", "Perfil 03": "🔽 Baixa", "Perfil 04": "🔽 Baixa", "Perfil 05": "❌" },
+  { "Métrica": "❌ Nunca resolve questões", "Perfil 01": "Muito alto (~70%+)", "Perfil 02": "Alto (~55%)", "Perfil 03": "Baixo (~20%)", "Perfil 04": "Médio (~40%)", "Perfil 05": "Muito alto (~80%)" },
+  { "Métrica": "🔁 Aprende após tentativas", "Perfil 01": "Baixo (~20%)", "Perfil 02": "Alto (~35%)", "Perfil 03": "Médio (~30%)", "Perfil 04": "Alto (~50%)", "Perfil 05": "Muito baixo" },
+  { "Métrica": "✅ Acerta de primeira", "Perfil 01": "Muito baixo", "Perfil 02": "Baixo", "Perfil 03": "Alto", "Perfil 04": "Baixo", "Perfil 05": "Muito baixo" },
+  { "Métrica": "🧠 Principais erros", "Perfil 01": "Sintaxe, estrutura, interpretação", "Perfil 02": "Lógica, condicionais", "Perfil 03": "Casos complexos, refinamento", "Perfil 04": "Ajustes finos, lógica iterativa", "Perfil 05": "Erros básicos + abandono" },
+  { "Métrica": "⚠️ Ponto crítico", "Perfil 01": "Início da disciplina", "Perfil 02": "Condicionais", "Perfil 03": "Vetores/complexidade", "Perfil 04": "Loops complexos", "Perfil 05": "Loops iniciais" },
+  { "Métrica": "📉 Momento de desistência", "Perfil 01": "Tardio ou persistente erro", "Perfil 02": "Médio", "Perfil 03": "Raro", "Perfil 04": "Raro", "Perfil 05": "Precoce (15–25 tent.)" },
+  { "Métrica": "🔍 Comportamento típico", "Perfil 01": "Tenta muito e não aprende", "Perfil 02": "Quase aprende", "Perfil 03": "Aprende rápido", "Perfil 04": "Aprende com esforço", "Perfil 05": "Para cedo" },
+  { "Métrica": "🎯 Potencial de intervenção", "Perfil 01": "🔥 Muito alto", "Perfil 02": "🔥🔥 Máximo", "Perfil 03": "🔽 Baixo", "Perfil 04": "🔼 Médio", "Perfil 05": "🔥 Alto" }
+]
