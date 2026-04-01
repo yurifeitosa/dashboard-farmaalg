@@ -4,36 +4,37 @@ import {
   BarChart, Bar, PieChart, Pie, Cell, Legend, ResponsiveContainer
 } from "recharts";
 
-// --- DADOS DA PÁGINA 3 (PERFIS E CARACTERÍSTICAS) ---
+// --- 1. DADOS DOS PERFIS (PÁGINA 3) ---
 const perfilInfo = [
-  { id: "Perfil 01", nome: "Dificuldade Inicial", desc: "Baixa base, muitos erros, pouca evolução" },
-  { id: "Perfil 02", nome: "Intermediário", desc: "Entende parcialmente, mas não consolida" },
-  { id: "Perfil 03", nome: "Bom Desempenho", desc: "Evolui rápido e mantém acertos" },
-  { id: "Perfil 04", nome: "Persistente", desc: "Aprende com esforço (muitas tentativas)" },
-  { id: "Perfil 05", nome: "Desistente", desc: "Abandona cedo" },
+  { id: "Perfil 01", nome: "Dificuldade Inicial", desc: "Baixa base, muitos erros, pouca evolução", cor: "#8884d8" },
+  { id: "Perfil 02", nome: "Intermediário", desc: "Entende parcialmente, mas não consolida", cor: "#82ca9d" },
+  { id: "Perfil 03", nome: "Bom Desempenho", desc: "Evolui rápido e mantém acertos", cor: "#ffc658" },
+  { id: "Perfil 04", nome: "Persistente", desc: "Aprende com esforço (muitas tentativas)", cor: "#ff8042" },
+  { id: "Perfil 05", nome: "Desistente", desc: "Abandona cedo", cor: "#d0ed57" },
 ];
 
-// --- DADOS DA PÁGINA 4 (SITUAÇÃO GERAL) ---
-const situacaoData = [
+// --- 2. PANORAMA GERAL (PÁGINA 4) ---
+const situacaoGeral = [
   { name: "❌ Nunca resolve", value: 61, cor: "#ff4d4d" },
-  { name: "🔁 Aprende após tentativas", value: 28, cor: "#ffc658" },
+  { name: "🔁 Aprende/Tentativas", value: 28, cor: "#ffc658" },
   { name: "✅ Acerta direto", value: 11, cor: "#82ca9d" },
 ];
 
-// --- DADOS ORIGINAIS DOS GRÁFICOS ---
-const perfilData = [
-  { nome: "Perfil 01", acerto: 22, alunos: 479 },
-  { nome: "Perfil 02", acerto: 44, alunos: 342 },
-  { nome: "Perfil 03", acerto: 68, alunos: 151 },
-  { nome: "Perfil 04", acerto: 61, alunos: 28 },
-  { nome: "Perfil 05", acerto: 21, alunos: 194 },
+// --- 3. DADOS DE DESEMPENHO UNIFICADOS ---
+const perfilStats = [
+  { nome: "Perfil 01", acerto: 22, alunos: 479, médiaSub: 275 },
+  { nome: "Perfil 02", acerto: 44, alunos: 342, médiaSub: 228 },
+  { nome: "Perfil 03", acerto: 68, alunos: 151, médiaSub: 189 },
+  { nome: "Perfil 04", acerto: 61, alunos: 28, médiaSub: 328 },
+  { nome: "Perfil 05", acerto: 21, alunos: 194, médiaSub: 124 },
 ];
 
+// --- 4. CURVA DE APRENDIZAGEM ---
 const evolucaoData = [
-  { tentativa: 1, p1: 0.2, p2: 0.5, p3: 0.6, p4: 0.3 },
-  { tentativa: 5, p1: 0.15, p2: 0.4, p3: 0.75, p4: 0.45 },
-  { tentativa: 10, p1: 0.12, p2: 0.35, p3: 0.85, p4: 0.55 },
-  { tentativa: 20, p1: 0.1, p2: 0.3, p3: 0.9, p4: 0.65 },
+  { tentativa: "Início", p1: 0.1, p2: 0.2, p3: 0.5, p4: 0.1, p5: 0.1 },
+  { tentativa: "T5", p1: 0.15, p2: 0.35, p3: 0.7, p4: 0.2, p5: 0.05 },
+  { tentativa: "T10", p1: 0.18, p2: 0.4, p3: 0.85, p4: 0.4, p5: 0.02 },
+  { tentativa: "T20", p1: 0.22, p2: 0.44, p3: 0.95, p4: 0.61, p5: 0.01 },
 ];
 
 const errosData = [
@@ -43,172 +44,164 @@ const errosData = [
   { nivel: "Difícil", erros: 40000, cor: "#ff4d4d" },
 ];
 
-const métricasTableData = [
-  { "Métrica": "👥 Quantidade de alunos", "Perfil 01": "479", "Perfil 02": "342", "Perfil 03": "151", "Perfil 04": "28", "Perfil 05": "194" },
-  { "Métrica": "📈 % dos alunos", "Perfil 01": "~40%", "Perfil 02": "~29%", "Perfil 03": "~13%", "Perfil 04": "~2%", "Perfil 05": "~16%" },
-  { "Métrica": "🎯 Taxa de acerto", "Perfil 01": "~22%", "Perfil 02": "~44%", "Perfil 03": "~68%", "Perfil 04": "~61%", "Perfil 05": "~21%" },
-  { "Métrica": "🔁 Submissões totais", "Perfil 01": "~132.000", "Perfil 02": "~78.000", "Perfil 03": "~28.500", "Perfil 04": "~9.200", "Perfil 05": "~24.000" },
-  { "Métrica": "📊 Média de submissões/aluno", "Perfil 01": "~275", "Perfil 02": "~228", "Perfil 03": "~189", "Perfil 04": "~328", "Perfil 05": "~124" },
-  { "Métrica": "🧠 Tipo de aprendizagem", "Perfil 01": "Não consolida", "Perfil 02": "Parcial", "Perfil 03": "Consolidada", "Perfil 04": "Por esforço", "Perfil 05": "Incompleta" },
-  { "Métrica": "📊 Evolução (probabilidade)", "Perfil 01": "🔻 Baixa", "Perfil 02": "⚖️ Média", "Perfil 03": "🔼 Alta", "Perfil 04": "🔼 Média/Alta", "Perfil 05": "❌ Nula" },
-  { "Métrica": "🧠 Principais erros", "Perfil 01": "Sintaxe, estrutura", "Perfil 02": "Lógica, condicionais", "Perfil 03": "Casos complexos", "Perfil 04": "Ajustes finos", "Perfil 05": "Básicos + abandono" },
-  { "Métrica": "🎯 Potencial de intervenção", "Perfil 01": "🔥 Muito alto", "Perfil 02": "🔥🔥 Máximo", "Perfil 03": "🔽 Baixa", "Perfil 04": "🔼 Média", "Perfil 05": "🔥 Alto" },
+// --- 5. TABELA COMPLETA COM AS 18 MÉTRICAS ---
+const métricasCompletas = [
+  {"Métrica": "👥 Quantidade de alunos", "P1": "479", "P2": "342", "P3": "151", "P4": "28", "P5": "194"},
+  {"Métrica": "📈 % dos alunos", "P1": "~40%", "P2": "~29%", "P3": "~13%", "P4": "~2%", "P5": "~16%"},
+  {"Métrica": "🎯 Taxa de acerto", "P1": "~22%", "P2": "~44%", "P3": "~68%", "P4": "~61%", "P5": "~21%"},
+  {"Métrica": "🔁 Submissões totais", "P1": "~132k", "P2": "~78k", "P3": "~28k", "P4": "~9k", "P5": "~24k"},
+  {"Métrica": "📊 Média de submissões/aluno", "P1": "~275", "P2": "~228", "P3": "~189", "P4": "~328", "P5": "~124"},
+  {"Métrica": "📈 Curva de aprendizagem", "P1": "Estagnada", "P2": "Oscilatória", "P3": "Crescente", "P4": "Lenta", "P5": "Interrompida"},
+  {"Métrica": "🧠 Tipo de aprendizagem", "P1": "Não consolida", "P2": "Parcial", "P3": "Consolidada", "P4": "Esforço", "P5": "Incompleta"},
+  {"Métrica": "📊 Evolução (probabilidade)", "P1": "🔻 Baixa", "P2": "⚖️ Média", "P3": "🔼 Alta", "P4": "🔼 Média", "P5": "❌ Nula"},
+  {"Métrica": "🔁 Oscilação", "P1": "🔼 Alta", "P2": "Muito alta", "P3": "🔽 Baixa", "P4": "🔼 Média", "P5": "❌"},
+  {"Métrica": "📉 Regressão", "P1": "🔼 Média", "P2": "🔼 Média", "P3": "🔽 Baixa", "P4": "🔽 Baixa", "P5": "❌"},
+  {"Métrica": "❌ Nunca resolve questões", "P1": "Alto (70%)", "P2": "Alto (55%)", "P3": "Baixo (20%)", "P4": "Médio (40%)", "P5": "Muito alto"},
+  {"Métrica": "🔁 Aprende após tentativas", "P1": "20%", "P2": "35%", "P3": "30%", "P4": "50%", "P5": "M. Baixo"},
+  {"Métrica": "✅ Acerta de primeira", "P1": "M. Baixo", "P2": "Baixo", "P3": "Alto", "P4": "Baixo", "P5": "M. Baixo"},
+  {"Métrica": "🧠 Principais erros", "P1": "Sintaxe/Estr.", "P2": "Lógica", "P3": "Complexos", "P4": "Ajustes", "P5": "Abandono"},
+  {"Métrica": "⚠️ Ponto crítico", "P1": "Início", "P2": "Condic.", "P3": "Vetores", "P4": "Loops", "P5": "Iniciais"},
+  {"Métrica": "📉 Momento de desistência", "P1": "Tardio", "P2": "Médio", "P3": "Raro", "P4": "Raro", "P5": "Precoce"},
+  {"Métrica": "🔍 Comportamento típico", "P1": "Tenta/Não", "P2": "Quase", "P3": "Rápido", "P4": "Esforçado", "P5": "Cedo"},
+  {"Métrica": "🎯 Potencial de intervenção", "P1": "Muito Alto", "P2": "Máximo", "P3": "Baixo", "P4": "Médio", "P5": "Alta"}
 ];
 
-const coresBase = ["#8884d8", "#82ca9d", "#ffc658", "#ff8042", "#d0ed57"];
-
 export default function App() {
-  const [perfilSelecionado, setPerfilSelecionado] = useState("Todos");
-  const [filtroTexto, setFiltroTexto] = useState("");
+  const [perfil, setPerfil] = useState("Todos");
 
-  const dadosFiltrados = useMemo(() => {
-    return perfilSelecionado === "Todos" 
-      ? perfilData 
-      : perfilData.filter(p => p.nome === perfilSelecionado);
-  }, [perfilSelecionado]);
-
-  const infoPerfilAtual = useMemo(() => {
-    return perfilInfo.find(p => p.id === perfilSelecionado);
-  }, [perfilSelecionado]);
-
-  const dadosTabelaFiltrados = useMemo(() => {
-    return métricasTableData.filter(row => 
-      row.Métrica.toLowerCase().includes(filtroTexto.toLowerCase())
-    );
-  }, [filtroTexto]);
+  const filteredStats = useMemo(() => {
+    return perfil === "Todos" ? perfilStats : perfilStats.filter(p => p.nome === perfil);
+  }, [perfil]);
 
   return (
-    <div style={{ padding: "20px", fontFamily: "sans-serif", backgroundColor: "#f4f7f6", minHeight: "100vh" }}>
-      <header style={{ marginBottom: "30px", textAlign: "center" }}>
-        <h1>📊 Dashboard FARMA-ALG-IA</h1>
-        <div style={{ background: "#fff", display: "inline-block", padding: "15px", borderRadius: "10px", boxShadow: "0 2px 4px rgba(0,0,0,0.1)" }}>
-          <label style={{ marginRight: "10px", fontWeight: "bold" }}>Filtro de Perfil:</label>
-          <select 
-            value={perfilSelecionado}
-            onChange={(e) => setPerfilSelecionado(e.target.value)}
-            style={{ padding: "8px", borderRadius: "5px", border: "1px solid #ccc" }}
-          >
-            <option value="Todos">Todos os Perfis</option>
+    <div style={{ padding: "20px", backgroundColor: "#f0f2f5", minHeight: "100vh", fontFamily: "sans-serif" }}>
+      <header style={{ textAlign: "center", marginBottom: "30px" }}>
+        <h1 style={{ color: "#1a3353" }}>📊 Dashboard Analítico FARMA-ALG-IA</h1>
+        <div style={{ background: "#fff", padding: "15px", borderRadius: "8px", display: "inline-block", boxShadow: "0 2px 5px rgba(0,0,0,0.1)" }}>
+          <label style={{ fontWeight: "bold" }}>Filtro: </label>
+          <select value={perfil} onChange={(e) => setPerfil(e.target.value)} style={{ padding: "5px" }}>
+            <option value="Todos">Ver Todos os Perfis</option>
             {perfilInfo.map(p => <option key={p.id} value={p.id}>{p.id} - {p.nome}</option>)}
           </select>
         </div>
-
-        {infoPerfilAtual && (
-          <div style={{ marginTop: "15px", color: "#555", fontSize: "1.1rem", fontStyle: "italic" }}>
-             <strong>Definição:</strong> {infoPerfilAtual.desc}
-          </div>
-        )}
       </header>
 
-      {/* GRID DE GRÁFICOS (5 GRÁFICOS AGORA) */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(400px, 1fr))", gap: "25px", marginBottom: "40px" }}>
+      {/* 6 GRÁFICOS ORGANIZADOS EM GRID */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))", gap: "20px", marginBottom: "40px" }}>
         
-        {/* GRÁFICO DA PÁGINA 4 (SITUAÇÃO GERAL) */}
-        <div style={{ background: "#fff", padding: "20px", borderRadius: "10px", boxShadow: "0 4px 6px rgba(0,0,0,0.05)" }}>
-          <h3 style={{ marginTop: 0 }}>🌐 Panorama de Aprendizagem (Geral)</h3>
-          <div style={{ width: "100%", height: 250 }}>
-            <ResponsiveContainer>
-              <PieChart>
-                <Pie data={situacaoData} dataKey="value" nameKey="name" outerRadius={70} label={({name, value}) => `${name}: ${value}%`}>
-                  {situacaoData.map((entry, index) => <Cell key={`c0-${index}`} fill={entry.cor} />)}
-                </Pie>
-                <Tooltip />
-              </PieChart>
-            </ResponsiveContainer>
-          </div>
+        {/* 1. Panorama Geral */}
+        <div style={{ background: "#fff", padding: "15px", borderRadius: "10px" }}>
+          <h4 style={{ margin: "0 0 10px 0" }}>🌐 Panorama de Aprendizagem</h4>
+          <ResponsiveContainer width="100%" height={220}>
+            <PieChart>
+              <Pie data={situacaoGeral} dataKey="value" nameKey="name" outerRadius={60} label>
+                {situacaoGeral.map((entry, i) => <Cell key={i} fill={entry.cor} />)}
+              </Pie>
+              <Tooltip />
+            </PieChart>
+          </ResponsiveContainer>
         </div>
 
-        {/* TAXA DE ACERTO */}
-        <div style={{ background: "#fff", padding: "20px", borderRadius: "10px", boxShadow: "0 4px 6px rgba(0,0,0,0.05)" }}>
-          <h3 style={{ marginTop: 0 }}>🎯 Taxa de Acerto {perfilSelecionado !== "Todos" ? infoPerfilAtual?.nome : ""}</h3>
-          <div style={{ width: "100%", height: 250 }}>
-            <ResponsiveContainer>
-              <BarChart data={dadosFiltrados}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                <XAxis dataKey="nome" />
-                <YAxis unit="%" />
-                <Tooltip />
-                <Bar dataKey="acerto">
-                  {dadosFiltrados.map((entry, index) => (
-                    <Cell key={`c1-${index}`} fill={entry.acerto < 30 ? "#ff4d4d" : "#8884d8"} />
-                  ))}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
+        {/* 2. Distribuição por Perfil */}
+        <div style={{ background: "#fff", padding: "15px", borderRadius: "10px" }}>
+          <h4 style={{ margin: "0 0 10px 0" }}>👥 Distribuição por Perfil</h4>
+          <ResponsiveContainer width="100%" height={220}>
+            <PieChart>
+              <Pie data={perfilStats} dataKey="alunos" nameKey="nome" outerRadius={60} label>
+                {perfilStats.map((entry, i) => <Cell key={i} fill={perfilInfo[i].cor} />)}
+              </Pie>
+              <Tooltip />
+              <Legend />
+            </PieChart>
+          </ResponsiveContainer>
         </div>
 
-        {/* CURVA DE APRENDIZAGEM */}
-        <div style={{ background: "#fff", padding: "20px", borderRadius: "10px", boxShadow: "0 4px 6px rgba(0,0,0,0.05)" }}>
-          <h3 style={{ marginTop: 0 }}>📈 Evolução de Tentativas</h3>
-          <div style={{ width: "100%", height: 250 }}>
-            <ResponsiveContainer>
-              <LineChart data={evolucaoData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="tentativa" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                {(perfilSelecionado === "Todos" || perfilSelecionado === "Perfil 01") && <Line type="monotone" dataKey="p1" name="P1" stroke="#8884d8" />}
-                {(perfilSelecionado === "Todos" || perfilSelecionado === "Perfil 02") && <Line type="monotone" dataKey="p2" name="P2" stroke="#82ca9d" />}
-                {(perfilSelecionado === "Todos" || perfilSelecionado === "Perfil 03") && <Line type="monotone" dataKey="p3" name="P3" stroke="#ffc658" />}
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
+        {/* 3. Taxa de Acerto */}
+        <div style={{ background: "#fff", padding: "15px", borderRadius: "10px" }}>
+          <h4 style={{ margin: "0 0 10px 0" }}>🎯 Taxa de Acerto (%)</h4>
+          <ResponsiveContainer width="100%" height={220}>
+            <BarChart data={filteredStats}>
+              <XAxis dataKey="nome" />
+              <YAxis unit="%" domain={[0, 100]} />
+              <Tooltip />
+              <Bar dataKey="acerto">
+                {filteredStats.map((e, i) => <Cell key={i} fill={e.acerto < 30 ? "#ff4d4d" : "#4e73df"} />)}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
         </div>
 
-        {/* VOLUME DE ERROS */}
-        <div style={{ background: "#fff", padding: "20px", borderRadius: "10px", boxShadow: "0 4px 6px rgba(0,0,0,0.05)" }}>
-          <h3 style={{ marginTop: 0 }}>⚠️ Erros por Nível</h3>
-          <div style={{ width: "100%", height: 250 }}>
-            <ResponsiveContainer>
-              <BarChart data={errosData}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                <XAxis dataKey="nivel" />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="erros">
-                  {errosData.map((entry, index) => <Cell key={`c2-${index}`} fill={entry.cor} />)}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
+        {/* 4. Média de Submissões */}
+        <div style={{ background: "#fff", padding: "15px", borderRadius: "10px" }}>
+          <h4 style={{ margin: "0 0 10px 0" }}>📊 Média de Submissões/Aluno</h4>
+          <ResponsiveContainer width="100%" height={220}>
+            <BarChart data={filteredStats}>
+              <XAxis dataKey="nome" />
+              <YAxis />
+              <Tooltip />
+              <Bar dataKey="médiaSub" fill="#1cc88a" />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+
+        {/* 5. Curva de Aprendizagem */}
+        <div style={{ background: "#fff", padding: "15px", borderRadius: "10px" }}>
+          <h4 style={{ margin: "0 0 10px 0" }}>📈 Curva de Aprendizagem</h4>
+          <ResponsiveContainer width="100%" height={220}>
+            <LineChart data={evolucaoData}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="tentativa" />
+              <YAxis domain={[0, 1]} />
+              <Tooltip />
+              <Legend />
+              {(perfil === "Todos" || perfil === "Perfil 01") && <Line name="P1" type="monotone" dataKey="p1" stroke="#8884d8" />}
+              {(perfil === "Todos" || perfil === "Perfil 02") && <Line name="P2" type="monotone" dataKey="p2" stroke="#82ca9d" />}
+              {(perfil === "Todos" || perfil === "Perfil 03") && <Line name="P3" type="monotone" dataKey="p3" stroke="#ffc658" />}
+              {(perfil === "Todos" || perfil === "Perfil 04") && <Line name="P4" type="monotone" dataKey="p4" stroke="#ff8042" />}
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+
+        {/* 6. Volume de Erros */}
+        <div style={{ background: "#fff", padding: "15px", borderRadius: "10px" }}>
+          <h4 style={{ margin: "0 0 10px 0" }}>⚠️ Erros por Nível</h4>
+          <ResponsiveContainer width="100%" height={220}>
+            <BarChart data={errosData}>
+              <XAxis dataKey="nivel" />
+              <YAxis />
+              <Tooltip />
+              <Bar dataKey="erros">
+                {errosData.map((e, i) => <Cell key={i} fill={e.cor} />)}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
         </div>
       </div>
 
-      {/* SEÇÃO DA TABELA */}
-      <div style={{ background: "#fff", padding: "25px", borderRadius: "10px", boxShadow: "0 4px 6px rgba(0,0,0,0.05)" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
-          <h3 style={{ margin: 0 }}>📋 Detalhamento Comparativo</h3>
-          <input 
-            type="text" 
-            placeholder="Filtrar métrica..." 
-            value={filtroTexto}
-            onChange={(e) => setFiltroTexto(e.target.value)}
-            style={{ padding: "10px", borderRadius: "20px", border: "1px solid #ddd", width: "250px" }}
-          />
-        </div>
+      {/* TABELA DETALHADA COM 18 MÉTRICAS */}
+      <div style={{ background: "#fff", padding: "20px", borderRadius: "10px", boxShadow: "0 4px 10px rgba(0,0,0,0.1)" }}>
+        <h3>📋 Tabela Detalhada (18 Métricas Científicas)</h3>
         <div style={{ overflowX: "auto" }}>
-          <table style={{ width: "100%", borderCollapse: "collapse" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "left" }}>
             <thead>
-              <tr style={{ backgroundColor: "#f8f9fa", textAlign: "left" }}>
-                <th style={{ padding: "12px", borderBottom: "2px solid #eee" }}>Métrica</th>
-                {(perfilSelecionado === "Todos" || perfilSelecionado === "Perfil 01") && <th style={{ padding: "12px", borderBottom: "2px solid #eee", color: "#8884d8" }}>P1: Dificuldade</th>}
-                {(perfilSelecionado === "Todos" || perfilSelecionado === "Perfil 02") && <th style={{ padding: "12px", borderBottom: "2px solid #eee", color: "#82ca9d" }}>P2: Intermed.</th>}
-                {(perfilSelecionado === "Todos" || perfilSelecionado === "Perfil 03") && <th style={{ padding: "12px", borderBottom: "2px solid #eee", color: "#ffc658" }}>P3: Bom Des.</th>}
-                {(perfilSelecionado === "Todos" || perfilSelecionado === "Perfil 04") && <th style={{ padding: "12px", borderBottom: "2px solid #eee", color: "#ff8042" }}>P4: Persist.</th>}
-                {(perfilSelecionado === "Todos" || perfilSelecionado === "Perfil 05") && <th style={{ padding: "12px", borderBottom: "2px solid #eee", color: "#d0ed57" }}>P5: Desist.</th>}
+              <tr style={{ backgroundColor: "#1a3353", color: "#fff" }}>
+                <th style={{ padding: "12px" }}>Métrica</th>
+                <th style={{ padding: "12px" }}>P1</th>
+                <th style={{ padding: "12px" }}>P2</th>
+                <th style={{ padding: "12px" }}>P3</th>
+                <th style={{ padding: "12px" }}>P4</th>
+                <th style={{ padding: "12px" }}>P5</th>
               </tr>
             </thead>
             <tbody>
-              {dadosTabelaFiltrados.map((row, index) => (
-                <tr key={index} style={{ borderBottom: "1px solid #f1f1f1" }}>
-                  <td style={{ padding: "10px", fontWeight: "bold" }}>{row.Métrica}</td>
-                  {(perfilSelecionado === "Todos" || perfilSelecionado === "Perfil 01") && <td style={{ padding: "10px" }}>{row["Perfil 01"]}</td>}
-                  {(perfilSelecionado === "Todos" || perfilSelecionado === "Perfil 02") && <td style={{ padding: "10px" }}>{row["Perfil 02"]}</td>}
-                  {(perfilSelecionado === "Todos" || perfilSelecionado === "Perfil 03") && <td style={{ padding: "10px" }}>{row["Perfil 03"]}</td>}
-                  {(perfilSelecionado === "Todos" || perfilSelecionado === "Perfil 04") && <td style={{ padding: "10px" }}>{row["Perfil 04"]}</td>}
-                  {(perfilSelecionado === "Todos" || perfilSelecionado === "Perfil 05") && <td style={{ padding: "10px" }}>{row["Perfil 05"]}</td>}
+              {métricasCompletas.map((row, idx) => (
+                <tr key={idx} style={{ borderBottom: "1px solid #eee", backgroundColor: idx % 2 === 0 ? "#fff" : "#f9f9f9" }}>
+                  <td style={{ padding: "10px", fontWeight: "bold", fontSize: "0.9rem" }}>{row.Métrica}</td>
+                  <td style={{ padding: "10px" }}>{row.P1}</td>
+                  <td style={{ padding: "10px" }}>{row.P2}</td>
+                  <td style={{ padding: "10px" }}>{row.P3}</td>
+                  <td style={{ padding: "10px" }}>{row.P4}</td>
+                  <td style={{ padding: "10px" }}>{row.P5}</td>
                 </tr>
               ))}
             </tbody>
